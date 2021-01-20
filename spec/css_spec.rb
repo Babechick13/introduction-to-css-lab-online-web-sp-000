@@ -1,4 +1,5 @@
 require "pry"
+
 RSpec.describe 'styling' do
   
   context 'within index.html' do
@@ -20,7 +21,7 @@ RSpec.describe 'styling' do
   context 'within style.css' do
     it 'sets body background to #00b3e6' do
       selector = parsed_css.find_by_selector('body')[0]
-      expect(selector).to include("background: #00b3e6"), "Missing properly formatted background declaration"
+      expect(selector).to (include("background: #00b3e6").or include("background-color: #00b3e6")), "Missing properly formatted background declaration"
     end
     it 'sets div width to 700px' do
       selector = parsed_css.find_by_selector('div')[0]
@@ -32,7 +33,6 @@ RSpec.describe 'styling' do
     end
     it 'sets div font-family to Helvetica Neue' do
       selector = parsed_css.find_by_selector('div')[0]
-      expect(selector).to include('font-family: "Helvetica Neue";'), "Missing properly formatted font-family declaration"
       expect(selector).to (include('font-family: "Helvetica Neue";').or include('font-family: Helvetica Neue;')), "Missing properly formatted font-family declaration"
     end
     it 'sets div background to white' do
@@ -48,6 +48,7 @@ RSpec.describe 'styling' do
       selector = parsed_css.find_by_selector('#main-header')[0]
       expect(selector).to include("font-size: 22px;"), "Missing properly formatted font-size declaration"
     end
+
     it 'sets .perspective-questions font style to italic' do
       selector = parsed_css.find_by_selector('.perspective-questions')[0]
       expect(selector).to include("font-style: italic"), "Missing properly formatted font-style declaration"
